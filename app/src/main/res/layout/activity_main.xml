@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/boton_jugar"
+        android:layout_width="@dimen/buttonWidth"
+        android:layout_height="@dimen/buttonHeigh"
+        android:layout_marginBottom="32dp"
+        android:onClick="play"
+        android:text="@string/play_buscaminas" />
+
+    <Button
+        android:id="@+id/boton_hall_of_fame"
+        android:layout_width="@dimen/buttonWidth"
+        android:layout_height="@dimen/buttonHeigh"
+        android:layout_marginBottom="32dp"
+        android:onClick="hall_of_fame"
+        android:text="@string/bests" />
+
+    <Button
+        android:id="@+id/boton_salir"
+        android:layout_width="@dimen/buttonWidth"
+        android:layout_height="@dimen/buttonHeigh"
+        android:onClick="exit"
+        android:text="@string/exit" />
+</LinearLayout>

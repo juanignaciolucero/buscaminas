@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MineSweeper</string>
+    <string name="play_buscaminas">Play</string>
+    <string name="bests">Hall of Fame</string>
+    <string name="exit">Exit</string>
+    <string name="users">User</string>
+    <string name="newButton">New</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="nickname">Nickname</string>
+    <string name="create">Create</string>
+    <string name="empty" />
+</resources>
