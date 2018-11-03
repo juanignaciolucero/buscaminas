@@ -4,10 +4,10 @@ import android.content.Context;
 
 public class MineSweeper {
     private static MineSweeper singletone;
-    protected static int GRID_HEIGHT;
-    protected static int GRID_WIDTH;
-    protected static int BOMBS;
-    protected static Cell[][] MATRIZ;
+    public static int GRID_HEIGHT;
+    public static int GRID_WIDTH;
+    public static int BOMBS;
+    public static Cell[][] MATRIZ;
 
 
     public static MineSweeper getInstance(){

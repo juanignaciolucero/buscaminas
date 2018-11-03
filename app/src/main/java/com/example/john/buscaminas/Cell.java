@@ -12,12 +12,9 @@ public class Cell extends android.support.v7.widget.AppCompatImageView implement
     private int neighbors;
     private boolean isRevealed;
     private boolean isFlagged;
-
-
     private int position;
 
     public Cell(Context context, AttributeSet attrs, int position) {
-
         super(context);
         this.position = position;
         this.isRevealed = false;
@@ -30,6 +27,32 @@ public class Cell extends android.support.v7.widget.AppCompatImageView implement
         Drawable boton = ContextCompat.getDrawable(getContext(), R.drawable.button);
         boton.setBounds(0, 0, getWidth(), getHeight());
         boton.draw(canvas);
+
+        super.onDraw(canvas);
+        drawImage(canvas, "button");
+
+        if( isFlagged() ){
+            drawImage(canvas, "flag");
+        }else if( isRevealed() && isBomb() && !isClicked() ){
+            drawImage(canvas, "bomb_normal");
+        }else {
+            if( isClicked() ){
+                if( getValue() == -1 ){
+                    drawBombExploded(canvas);
+                }else {
+                    drawNumber(canvas);
+                }
+            }else{
+                drawButton(canvas);
+            }
+        }
+    }
+
+    private void drawImage(Canvas canvas, String resource){
+        int resID = getResources().getIdentifier(resource, "drawable", getContext().getPackageName());
+        Drawable drawable = getResources().getDrawable(resID);
+        drawable.setBounds(0,0,getWidth(),getHeight());
+        drawable.draw(canvas);
     }
 
     @Override
@@ -53,7 +76,6 @@ public class Cell extends android.support.v7.widget.AppCompatImageView implement
     }
 
     public void setBomb() {
-
         isBomb = true;
     }
 
@@ -99,5 +121,4 @@ public class Cell extends android.support.v7.widget.AppCompatImageView implement
     public void setPosition(int position) {
         this.position = position;
     }
-
 }

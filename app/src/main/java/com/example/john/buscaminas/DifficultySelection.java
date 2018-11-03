@@ -3,6 +3,7 @@ package com.example.john.buscaminas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 public class DifficultySelection extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class DifficultySelection extends AppCompatActivity {
                 core.setGRID_WIDTH(8);
                 core.setBOMBS(10);
                 core.createGrid(this);
+                Log.e("Dificultad", "8");
                 break;
             case R.id.medium_diff_button:
                 core.setGRID_HEIGHT(16);

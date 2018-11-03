@@ -12,7 +12,6 @@ public class GridModel {
     GridModel(int width, int height, int bombs, Context context) {
         this.context = context;
         createGrid(width, height, bombs);
-
     }
 
     private void createGrid(int width, int height, int bombs) {
