@@ -14,12 +14,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void play(View view){
-        Intent play = new Intent(this,DifficultySelection.class);
+        Intent play = new Intent(this,DifficultySelectionActivity.class);
         startActivity(play);
     }
 
     public void hall_of_fame(View view){
-        Intent bests = new Intent(this,Bests.class);
+        Intent bests = new Intent(this,BestsActivity.class);
         startActivity(bests);
     }
 

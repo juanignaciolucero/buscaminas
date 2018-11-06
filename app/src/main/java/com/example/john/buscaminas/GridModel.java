@@ -6,12 +6,13 @@ import java.util.Random;
 
 public class GridModel {
 
-    private static Cell[][] matriz;
+    private static Cell[][] matrix;
     private static Context context;
 
     GridModel(int width, int height, int bombs, Context context) {
         this.context = context;
         createGrid(width, height, bombs);
+
     }
 
     private void createGrid(int width, int height, int bombs) {
@@ -24,7 +25,7 @@ public class GridModel {
         }
         plantBombs(matriz, width, height, bombs);
         calcNeighbors(matriz, width, height);
-        this.matriz = matriz;
+        this.matrix = matriz;
     }
 
     private void calcNeighbors(Cell[][] matriz, int width, int height) {
@@ -39,7 +40,11 @@ public class GridModel {
         int count = 0;
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                if (x + i >= 0 && x + i < width && y + j >= 0 && y + j < height) {
+                if (x + i >= 0 &&
+                        x + i < width &&
+                        y + j >= 0 &&
+                        y + j < height &&
+                        !(j==0 && i ==0)) {
                     if (matriz[x + i][y + j].isBomb()) {
                         count++;
                     }
@@ -64,6 +69,6 @@ public class GridModel {
     }
 
     public Cell[][] getGrid() {
-        return this.matriz;
+        return this.matrix;
     }
 }

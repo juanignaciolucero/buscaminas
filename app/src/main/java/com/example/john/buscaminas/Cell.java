@@ -1,6 +1,8 @@
 package com.example.john.buscaminas;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
@@ -12,70 +14,101 @@ public class Cell extends android.support.v7.widget.AppCompatImageView implement
     private int neighbors;
     private boolean isRevealed;
     private boolean isFlagged;
+    private boolean ended;
+    private int[] numbers = {R.drawable.number_0, R.drawable.number_1,
+            R.drawable.number_2, R.drawable.number_3,
+            R.drawable.number_4, R.drawable.number_5,
+            R.drawable.number_6, R.drawable.number_7,
+            R.drawable.number_8};
+
+
     private int position;
 
     public Cell(Context context, AttributeSet attrs, int position) {
+
         super(context);
         this.position = position;
         this.isRevealed = false;
         this.isFlagged = false;
+        this.ended = false;
+        setOnClickListener(this);
+        setOnLongClickListener(this);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Drawable boton = ContextCompat.getDrawable(getContext(), R.drawable.button);
-        boton.setBounds(0, 0, getWidth(), getHeight());
-        boton.draw(canvas);
-
-        super.onDraw(canvas);
-        drawImage(canvas, "button");
-
-        if( isFlagged() ){
-            drawImage(canvas, "flag");
-        }else if( isRevealed() && isBomb() && !isClicked() ){
-            drawImage(canvas, "bomb_normal");
-        }else {
-            if( isClicked() ){
-                if( getValue() == -1 ){
-                    drawBombExploded(canvas);
-                }else {
-                    drawNumber(canvas);
-                }
-            }else{
-                drawButton(canvas);
+        int draw = R.drawable.button;
+        if (isFlagged()) {
+            if (ended && !isBomb()) {
+                draw = R.drawable.bomb_wrong;
+            } else {
+                draw = R.drawable.flag;
             }
+        } else if (isRevealed()) {
+            if (!isBomb()) {
+                draw = numbers[neighbors];
+            } else {
+                draw = R.drawable.bomb_exploded;
+            }
+        } else if (isBomb() && MineSweeper.ENDED) {
+            draw = R.drawable.bomb_normal;
         }
-    }
 
-    private void drawImage(Canvas canvas, String resource){
-        int resID = getResources().getIdentifier(resource, "drawable", getContext().getPackageName());
-        Drawable drawable = getResources().getDrawable(resID);
-        drawable.setBounds(0,0,getWidth(),getHeight());
-        drawable.draw(canvas);
+        Drawable button = ContextCompat.getDrawable(getContext(), draw);
+        button.setBounds(0, 0, getWidth(), getHeight());
+        button.draw(canvas);
     }
 
     @Override
     public void onClick(View v) {
-        if (!isRevealed) {
-            setRevealed();
-            invalidate();
+        if (!ended) {
+            if (!isRevealed) {
+                setRevealed();
+                invalidate();
+                if (neighbors == 0) {
+                    MineSweeper.click(position);
+                }
+                if (isBomb()) {
+                    MineSweeper.endGame();
+                }
+            }
         }
     }
 
     @Override
     public boolean onLongClick(View v) {
-        setFlagged();
-        return false;
+        if (!ended) {
+            if (!isRevealed()) {
+                setFlagged();
+                invalidate();
+            }
+        }
+        return true;
     }
+/*
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+        }
+    }*/
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int dimension = Math.min(widthMeasureSpec, heightMeasureSpec);
-        super.onMeasure(dimension, dimension);
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            super.onMeasure(heightMeasureSpec, heightMeasureSpec);
+        }else if (getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){
+            super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+        }
     }
 
     public void setBomb() {
+
         isBomb = true;
     }
 
@@ -87,11 +120,6 @@ public class Cell extends android.support.v7.widget.AppCompatImageView implement
     public void setNeighbors(int neighbors) {
 
         this.neighbors = neighbors;
-    }
-
-    public int getNeighbors() {
-
-        return neighbors;
     }
 
     public boolean isRevealed() {
@@ -114,11 +142,8 @@ public class Cell extends android.support.v7.widget.AppCompatImageView implement
         isFlagged = !isFlagged;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
+    public void end() {
+        this.ended = true;
+        invalidate();
     }
 }

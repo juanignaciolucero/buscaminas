@@ -3,7 +3,7 @@ package com.example.john.buscaminas;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class Bests extends Activity {
+public class BestsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bests);

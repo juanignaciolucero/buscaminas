@@ -1,11 +1,18 @@
 package com.example.john.buscaminas;
 
-import android.util.Log;
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class GridAdapter extends BaseAdapter {
+    private Cell[][] matrix;
+    private Context context;
+
+    GridAdapter(Context context) {
+        this.context = context;
+        this.matrix = MineSweeper.MATRIZ;
+    }
 
     @Override
     public int getCount() {
@@ -26,8 +33,6 @@ public class GridAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         int x = position % MineSweeper.GRID_WIDTH;
         int y = position / MineSweeper.GRID_WIDTH;
-        Cell cell = MineSweeper.MATRIZ[x][y];
-        cell.setImageResource(R.drawable.button);
-        return cell;
+        return matrix[x][y];
     }
 }
