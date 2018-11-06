@@ -20,7 +20,7 @@ public class PlayActivity extends Activity {
         gridView.setNumColumns(MineSweeper.GRID_WIDTH);
         gridAdapter = new GridAdapter(this);
         gridView.setAdapter(gridAdapter);
-        TextView bombCounter = (TextView) findViewById(R.id.mineCounter);
+        TextView bombCounter = findViewById(R.id.mineCounter);
         bombCounter.setText(Integer.toString(MineSweeper.BOMBS));
         t = findViewById(R.id.timeCounter);
         t.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
@@ -28,12 +28,10 @@ public class PlayActivity extends Activity {
             public void onChronometerTick(Chronometer cArg) {
                 long time = SystemClock.elapsedRealtime() - cArg.getBase();
                 int s= (int)time /1000 ;
-
                 cArg.setText(Integer.toString(s));
             }
         });
         t.setBase(SystemClock.elapsedRealtime());
-        t.setTextSize(36);
         t.start();
     }
 }

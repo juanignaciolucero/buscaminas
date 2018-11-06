@@ -86,25 +86,16 @@ public class Cell extends android.support.v7.widget.AppCompatImageView implement
         }
         return true;
     }
-/*
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
 
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-        }
-    }*/
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+        /*if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             super.onMeasure(heightMeasureSpec, heightMeasureSpec);
-        }else if (getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){
+        }else if (getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){*/
             super.onMeasure(widthMeasureSpec, widthMeasureSpec);
-        }
+        //}
     }
 
     public void setBomb() {

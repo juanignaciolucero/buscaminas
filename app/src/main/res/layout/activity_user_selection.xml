@@ -41,15 +41,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/playButton"
             android:layout_width="@dimen/buttonWidth"
             android:layout_height="@dimen/buttonHeigh"
+            android:onClick="play"
             android:text="@string/play_buscaminas" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/createButton"
             android:layout_width="@dimen/buttonWidth"
             android:layout_height="@dimen/buttonHeigh"
+            android:onClick="createUser"
             android:text="@string/newButton" />
     </LinearLayout>
 

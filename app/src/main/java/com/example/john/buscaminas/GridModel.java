@@ -7,7 +7,7 @@ import java.util.Random;
 public class GridModel {
 
     private static Cell[][] matrix;
-    private static Context context;
+    private Context context;
 
     GridModel(int width, int height, int bombs, Context context) {
         this.context = context;
@@ -16,27 +16,27 @@ public class GridModel {
     }
 
     private void createGrid(int width, int height, int bombs) {
-        Cell[][] matriz = new Cell[width][height];
+        Cell[][] matrix = new Cell[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 Cell cell = new Cell(context,null, j * MineSweeper.GRID_WIDTH + i);
-                matriz[i][j] = cell;
+                matrix[i][j] = cell;
             }
         }
-        plantBombs(matriz, width, height, bombs);
-        calcNeighbors(matriz, width, height);
-        this.matrix = matriz;
+        plantBombs(matrix, width, height, bombs);
+        calcNeighbors(matrix, width, height);
+        this.matrix = matrix;
     }
 
-    private void calcNeighbors(Cell[][] matriz, int width, int height) {
+    private void calcNeighbors(Cell[][] matrix, int width, int height) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                matriz[i][j].setNeighbors(neighbors(i, j, matriz, width, height));
+                matrix[i][j].setNeighbors(neighbors(i, j, matrix, width, height));
             }
         }
     }
 
-    private int neighbors(int x, int y, Cell[][] matriz, int width, int height) {
+    private int neighbors(int x, int y, Cell[][] matrix, int width, int height) {
         int count = 0;
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
@@ -45,7 +45,7 @@ public class GridModel {
                         y + j >= 0 &&
                         y + j < height &&
                         !(j==0 && i ==0)) {
-                    if (matriz[x + i][y + j].isBomb()) {
+                    if (matrix[x + i][y + j].isBomb()) {
                         count++;
                     }
                 }
@@ -54,15 +54,14 @@ public class GridModel {
         return count;
     }
 
-    private void plantBombs(Cell[][] matriz, int width, int height, int bombs) {
+    private void plantBombs(Cell[][] matrix, int width, int height, int bombs) {
         Random r = new Random();
-        Boolean salir = false;
         int x, y;
-        while (!salir & bombs > 0) {
+        while ( bombs > 0) {
             x = r.nextInt(width);
             y = r.nextInt(height);
-            if (!matriz[x][y].isBomb()) {
-                matriz[x][y].setBomb();
+            if (!matrix[x][y].isBomb()) {
+                matrix[x][y].setBomb();
                 bombs--;
             }
         }

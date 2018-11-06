@@ -17,11 +17,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".PlayActivity"
-            android:parentActivityName=".DifficultySelectionActivity"/>
+            android:parentActivityName=".DifficultySelectionActivity"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".DifficultySelectionActivity"
             android:parentActivityName=".DifficultySelectionActivity"/>
-        <activity android:name=".UserSelecctionActivity"/>
+        <activity android:name=".UserSelectionActivity"/>
     </application>
 
 </manifest>
