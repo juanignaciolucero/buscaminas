@@ -1,4 +1,5 @@
-package com.example.john.buscaminas;
+package com.example.john.buscaminas.db;
+
 
 import java.util.List;
 
@@ -21,7 +22,8 @@ public interface UserDao {
 
     @Insert
     void insertAll(User... users);
-
+    @Insert
+    void insert(User user);
     @Delete
     void delete(User user);
 }

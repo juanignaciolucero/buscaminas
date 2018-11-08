@@ -11,5 +11,6 @@
     <string name="nickname">Alias</string>
     <string name="create">Crear</string>
     <string name="empty"/>
-    <string name="left">Facil</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
 </resources>

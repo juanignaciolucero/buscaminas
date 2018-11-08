@@ -1,17 +1,19 @@
-package com.example.john.buscaminas;
+package com.example.john.buscaminas.util;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.example.john.buscaminas.view.Cell;
+
 public class GridAdapter extends BaseAdapter {
     private Cell[][] matrix;
-    private Context context;
+    public Context context;
 
-    GridAdapter(Context context) {
+    public GridAdapter(Context context) {
         this.context = context;
-        this.matrix = MineSweeper.MATRIZ;
+        this.matrix = MineSweeper.MATRIX;
     }
 
     @Override

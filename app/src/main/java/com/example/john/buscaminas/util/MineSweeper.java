@@ -1,21 +1,23 @@
-package com.example.john.buscaminas;
+package com.example.john.buscaminas.util;
 
 import android.content.Context;
 
+import com.example.john.buscaminas.view.Cell;
+
 public class MineSweeper {
-    private static MineSweeper singletone;
-    protected static int GRID_HEIGHT;
-    protected static int GRID_WIDTH;
-    protected static int BOMBS;
-    protected static Cell[][] MATRIZ;
-    protected static boolean ENDED;
+    private static MineSweeper INSTANCE;
+    public static int GRID_HEIGHT;
+    public static int GRID_WIDTH;
+    public static int BOMBS;
+    public static Cell[][] MATRIX;
+    public static boolean ENDED;
 
 
     public static MineSweeper getInstance() {
-        if (singletone == null) {
-            singletone = new MineSweeper();
+        if (INSTANCE == null) {
+            INSTANCE = new MineSweeper();
         }
-        return singletone;
+        return INSTANCE;
     }
 
     MineSweeper() {
@@ -32,7 +34,7 @@ public class MineSweeper {
                         y + j >= 0 &&
                         y + j < GRID_HEIGHT &&
                         !(i == 0 && j == 0)) {
-                    MATRIZ[x + i][y + j].onClick(MATRIZ[x][y]);
+                    MATRIX[x + i][y + j].onClick(MATRIX[x][y]);
                 }
             }
         }
@@ -42,7 +44,7 @@ public class MineSweeper {
         ENDED = true;
         for (int i = 0; i < GRID_WIDTH; i++) {
             for (int j = 0; j < GRID_HEIGHT; j++) {
-                MATRIZ[i][j].end();
+                MATRIX[i][j].end();
             }
         }
     }
@@ -77,7 +79,7 @@ public class MineSweeper {
 
     public void createGrid(Context context) {
         GridModel gridModel = new GridModel(this.GRID_WIDTH, this.GRID_HEIGHT, this.BOMBS, context);
-        this.MATRIZ = gridModel.getGrid();
+        this.MATRIX = gridModel.getGrid();
     }
 
 }

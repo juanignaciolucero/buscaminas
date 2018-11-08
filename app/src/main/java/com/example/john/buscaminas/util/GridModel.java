@@ -1,6 +1,8 @@
-package com.example.john.buscaminas;
+package com.example.john.buscaminas.util;
 
 import android.content.Context;
+
+import com.example.john.buscaminas.view.Cell;
 
 import java.util.Random;
 

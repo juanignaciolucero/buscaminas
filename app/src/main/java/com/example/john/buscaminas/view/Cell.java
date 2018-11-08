@@ -1,13 +1,14 @@
-package com.example.john.buscaminas;
+package com.example.john.buscaminas.view;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.example.john.buscaminas.R;
+import com.example.john.buscaminas.util.MineSweeper;
 
 public class Cell extends android.support.v7.widget.AppCompatImageView implements View.OnClickListener, View.OnLongClickListener {
     private boolean isBomb;
