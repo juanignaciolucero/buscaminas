@@ -3,14 +3,14 @@ package com.example.john.buscaminas.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.example.john.buscaminas.R;
 import com.example.john.buscaminas.util.MineSweeper;
 
-public class Cell extends android.support.v7.widget.AppCompatImageView implements View.OnClickListener, View.OnLongClickListener {
+public class Cell extends androidx.appcompat.widget.AppCompatImageView implements View.OnClickListener, View.OnLongClickListener {
     private boolean isBomb;
     private int neighbors;
     private boolean isRevealed;
@@ -73,6 +73,7 @@ public class Cell extends android.support.v7.widget.AppCompatImageView implement
                 if (isBomb()) {
                     MineSweeper.endGame();
                 }
+                MineSweeper.checkForWin();
             }
         }
     }
@@ -134,7 +135,7 @@ public class Cell extends android.support.v7.widget.AppCompatImageView implement
         isFlagged = !isFlagged;
     }
 
-    public void end() {
+    public void end(){
         this.ended = true;
         invalidate();
     }

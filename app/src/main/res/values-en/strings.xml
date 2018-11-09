@@ -14,4 +14,6 @@
     <string name="empty" />
     <string name="nombre">First Name</string>
     <string name="apellido">Last name</string>
+    <string name="lose">You Lose!</string>
+    <string name="win">You Win!</string>
 </resources>

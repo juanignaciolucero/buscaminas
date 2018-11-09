@@ -1,9 +1,14 @@
 package com.example.john.buscaminas;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.john.buscaminas.db.GameDB;
+import com.example.john.buscaminas.util.MineSweeper;
+
+import androidx.room.Room;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,10 +16,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        GameDB db = Room.databaseBuilder(getApplicationContext(),GameDB.class,"game_db")
+                .allowMainThreadQueries()
+                .build();
+        MineSweeper.setDB(db);
     }
 
     public void play(View view){
-        Intent play = new Intent(this,DifficultySelectionActivity.class);
+        Intent play = new Intent(this,UserSelectionActivity.class);
         startActivity(play);
     }
 

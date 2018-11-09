@@ -1,12 +1,12 @@
 package com.example.john.buscaminas;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Chronometer;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.john.buscaminas.util.GridAdapter;
 import com.example.john.buscaminas.util.MineSweeper;
@@ -19,6 +19,7 @@ public class PlayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MineSweeper.setActivity(this);
         setContentView(R.layout.activity_play);
         gridView = findViewById(R.id.msgridView);
         gridView.setNumColumns(MineSweeper.GRID_WIDTH);
@@ -37,5 +38,13 @@ public class PlayActivity extends AppCompatActivity {
         });
         t.setBase(SystemClock.elapsedRealtime());
         t.start();
+    }
+    public void endLose(){
+        Toast.makeText(this,R.string.lose,Toast.LENGTH_LONG).show();
+        //finish();
+    }
+    public void endWin(){
+        Toast.makeText(this,R.string.win,Toast.LENGTH_LONG).show();
+        //finish();
     }
 }

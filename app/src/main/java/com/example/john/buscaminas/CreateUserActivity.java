@@ -1,21 +1,23 @@
 package com.example.john.buscaminas;
 
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 
 import com.example.john.buscaminas.db.GameDB;
 import com.example.john.buscaminas.db.User;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
 public class CreateUserActivity extends AppCompatActivity {
-    private TextInputEditText alias,firstName,lastName;
+    private TextInputEditText alias, firstName, lastName;
     GameDB db;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db = GameDB.getDatabase(this);
+        db = GameDB.getDB(this);
         setContentView(R.layout.activity_user_creation);
         alias = findViewById(R.id.aliasInputText);
         firstName = findViewById(R.id.firstNameInputText);
@@ -31,9 +33,11 @@ public class CreateUserActivity extends AppCompatActivity {
                 user.setLastName(lastName.getText().toString());
                 user.setNickName(alias.getText().toString());
                 List<User> users = db.userDao().getAll();
-                
-                db.userDao().insert(user);
+                if (!users.contains(user)) {
+                    db.userDao().insert(user);
+                }
             }
         }).start();
+        finish();
     }
 }

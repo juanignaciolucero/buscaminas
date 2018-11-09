@@ -2,6 +2,8 @@ package com.example.john.buscaminas.util;
 
 import android.content.Context;
 
+import com.example.john.buscaminas.PlayActivity;
+import com.example.john.buscaminas.db.GameDB;
 import com.example.john.buscaminas.view.Cell;
 
 public class MineSweeper {
@@ -11,6 +13,8 @@ public class MineSweeper {
     public static int BOMBS;
     public static Cell[][] MATRIX;
     public static boolean ENDED;
+    private static PlayActivity activity;
+    public static GameDB DB;
 
 
     public static MineSweeper getInstance() {
@@ -21,7 +25,7 @@ public class MineSweeper {
     }
 
     MineSweeper() {
-        this.ENDED = false;
+        ENDED = false;
     }
 
     public static void click(int position) {
@@ -47,6 +51,34 @@ public class MineSweeper {
                 MATRIX[i][j].end();
             }
         }
+        activity.endLose();
+    }
+
+    public static GameDB getDB() {
+        return DB;
+    }
+
+    public static void setDB(GameDB DB) {
+        MineSweeper.DB = DB;
+    }
+
+    public static void checkForWin() {
+        Boolean exit =false;
+        int x=0;
+        int y=0;
+        while(y<MineSweeper.GRID_HEIGHT&&!exit){
+            while(x<MineSweeper.GRID_WIDTH&&!exit){
+                if(!MineSweeper.MATRIX[x][y].isRevealed()&&!MineSweeper.MATRIX[x][y].isBomb()){
+                    exit=true;
+                }
+                x++;
+            }
+            x=0;
+            y++;
+        }
+        if(!exit){
+            activity.endWin();
+        }
     }
 
     public int getGRID_HEIGHT() {
@@ -54,7 +86,7 @@ public class MineSweeper {
     }
 
     public void setGRID_HEIGHT(int GRID_HEIGHT) {
-        this.GRID_HEIGHT = GRID_HEIGHT;
+        MineSweeper.GRID_HEIGHT = GRID_HEIGHT;
     }
 
     public int getGRID_WIDTH() {
@@ -62,7 +94,7 @@ public class MineSweeper {
     }
 
     public void setGRID_WIDTH(int GRID_WIDTH) {
-        this.GRID_WIDTH = GRID_WIDTH;
+        MineSweeper.GRID_WIDTH = GRID_WIDTH;
     }
 
     public int getBOMBS() {
@@ -70,16 +102,24 @@ public class MineSweeper {
     }
 
     public void setBOMBS(int BOMBS) {
-        this.BOMBS = BOMBS;
+        MineSweeper.BOMBS = BOMBS;
     }
 
     public void setENDED(boolean ended) {
-        this.ENDED = ended;
+        ENDED = ended;
     }
 
     public void createGrid(Context context) {
-        GridModel gridModel = new GridModel(this.GRID_WIDTH, this.GRID_HEIGHT, this.BOMBS, context);
-        this.MATRIX = gridModel.getGrid();
+        GridModel gridModel = new GridModel(GRID_WIDTH, GRID_HEIGHT, BOMBS, context);
+        MATRIX = gridModel.getGrid();
+    }
+
+    public PlayActivity getActivity() {
+        return activity;
+    }
+
+    public static void setActivity(PlayActivity activity) {
+        MineSweeper.activity = activity;
     }
 
 }

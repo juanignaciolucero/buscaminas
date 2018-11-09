@@ -13,4 +13,6 @@
     <string name="empty"/>
     <string name="nombre">Nombre</string>
     <string name="apellido">Apellido</string>
+    <string name="lose">Perdiste</string>
+    <string name="win">Ganaste!</string>
 </resources>
