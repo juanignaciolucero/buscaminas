@@ -16,4 +16,5 @@
     <string name="apellido">Last name</string>
     <string name="lose">You Lose!</string>
     <string name="win">You Win!</string>
+    <string name="ok">Ok</string>
 </resources>

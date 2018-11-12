@@ -15,4 +15,5 @@
     <string name="apellido">Apellido</string>
     <string name="lose">Perdiste</string>
     <string name="win">Ganaste!</string>
+    <string name="ok">Aceptar</string>
 </resources>
