@@ -3,6 +3,7 @@ package com.example.john.buscaminas.util;
 import android.content.Context;
 
 import com.example.john.buscaminas.PlayActivity;
+import com.example.john.buscaminas.db.Game;
 import com.example.john.buscaminas.db.GameDB;
 import com.example.john.buscaminas.view.Cell;
 
@@ -14,7 +15,9 @@ public class MineSweeper {
     public static Cell[][] MATRIX;
     public static boolean ENDED;
     private static PlayActivity activity;
+    public static int user;
     public static GameDB DB;
+    public static int dif;
 
 
     public static MineSweeper getInstance() {
@@ -63,22 +66,30 @@ public class MineSweeper {
     }
 
     public static void checkForWin() {
-        Boolean exit =false;
-        int x=0;
-        int y=0;
-        while(y<MineSweeper.GRID_HEIGHT&&!exit){
-            while(x<MineSweeper.GRID_WIDTH&&!exit){
-                if(!MineSweeper.MATRIX[x][y].isRevealed()&&!MineSweeper.MATRIX[x][y].isBomb()){
-                    exit=true;
+        Boolean exit = false;
+        int x = 0;
+        int y = 0;
+        while (y < MineSweeper.GRID_HEIGHT && !exit) {
+            while (x < MineSweeper.GRID_WIDTH && !exit) {
+                if (!MineSweeper.MATRIX[x][y].isRevealed() && !MineSweeper.MATRIX[x][y].isBomb()) {
+                    exit = true;
                 }
                 x++;
             }
-            x=0;
+            x = 0;
             y++;
         }
-        if(!exit){
+        if (!exit) {
             activity.endWin();
         }
+    }
+
+    public static void setUser(int user) {
+        MineSweeper.user = user;
+    }
+
+    public static void saveGame(Game game) {
+        DB.gameDao().insert(game);
     }
 
     public int getGRID_HEIGHT() {
@@ -122,4 +133,7 @@ public class MineSweeper {
         MineSweeper.activity = activity;
     }
 
+    public void setDif(int dif) {
+        MineSweeper.dif=dif;
+    }
 }

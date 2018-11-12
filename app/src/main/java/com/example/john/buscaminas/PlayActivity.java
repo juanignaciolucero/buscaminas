@@ -13,6 +13,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.john.buscaminas.db.Game;
 import com.example.john.buscaminas.util.GridAdapter;
 import com.example.john.buscaminas.util.MineSweeper;
 
@@ -51,7 +52,13 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void endWin() {
-        createMsg(true).show();//TODO SAVE IN DB
+        t.stop();
+        int time =(int) (SystemClock.elapsedRealtime()-t.getBase())/1000;
+        Game game = new Game(MineSweeper.user,MineSweeper.dif,time);
+        MineSweeper.saveGame(game);
+        createMsg(true).show();
+
+
     }
 
     public AlertDialog.Builder createMsg(Boolean win) {

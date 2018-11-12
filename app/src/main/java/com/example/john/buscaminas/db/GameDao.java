@@ -15,8 +15,11 @@ public interface GameDao {
     @Query("SELECT * FROM Game WHERE gid IN (:gameIds)")
     List<Game> loadAllByIds(int[] gameIds);
 
-   /* @Query("SELECT * FROM Game WHERE Game.gameDif=gameDif ORDER BY Game.time  ASC ")
-    List<Game> findGameByDiff(int gameDiff);*/
+    @Query("SELECT * FROM Game WHERE Game.gameDif= :gameDiff ORDER BY Game.time  ASC LIMIT 10")
+    List<Game> findGameByDiff(int gameDiff);
+
+    @Insert
+    void insert(Game game);
 
     @Insert
     void insertAll(Game... games);

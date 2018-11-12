@@ -1,27 +1,41 @@
-<LinearLayout
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.tabs.TabLayout
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="60sp"
+        android:gravity="center_horizontal">
 
-        <com.google.android.material.tabs.TabItem
+        <Button
+            android:id="@+id/easy_diff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="showTable"
             android:text="@string/easy" />
 
-        <com.google.android.material.tabs.TabItem
+        <Button
+            android:id="@+id/medium_diff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="showTable"
             android:text="@string/medium" />
 
-        <com.google.android.material.tabs.TabItem
+        <Button
+            android:id="@+id/hard_diff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="showTable"
             android:text="@string/hard" />
 
-    </com.google.android.material.tabs.TabLayout>
-</LinearLayout>
+    </TableRow>
+
+</TableLayout>
+

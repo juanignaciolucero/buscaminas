@@ -24,7 +24,8 @@
             android:id="@+id/aliasInputText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nickname" />
+            android:hint="@string/nickname"
+            android:nextFocusForward="@id/firstNameInputText" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -45,7 +46,8 @@
             android:id="@+id/firstNameInputText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nombre" />
+            android:hint="@string/nombre"
+            android:nextFocusForward="@id/lastNameInputText" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -66,7 +68,8 @@
             android:id="@+id/lastNameInputText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/apellido" />
+            android:hint="@string/apellido"
+            android:nextFocusForward="@id/button" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

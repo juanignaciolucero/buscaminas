@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="10"
+    android:background="#C0C0C0">
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="horizontal"
         tools:background="#999999">
 
@@ -32,22 +33,20 @@
             android:id="@+id/timeCounter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#000"
-            android:enabled="true"
-            android:format="%s"
             android:gravity="end"
             android:hint="@string/medium"
             android:text="@string/medium"
+            android:format="SSS"
             android:textColor="#F00"
             android:textStyle="bold"
-            android:visibility="visible" />
+             />
     </LinearLayout>
 
     <GridView
         android:id="@+id/msgridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="9"
+        android:layout_weight="8"
         />
 
 </LinearLayout>
