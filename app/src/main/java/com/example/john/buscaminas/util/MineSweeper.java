@@ -12,6 +12,7 @@ public class MineSweeper {
     private int GRID_HEIGHT;
     private int GRID_WIDTH;
     private int BOMBS;
+    private int bombsLeft;
     private Cell[][] MATRIX;
     private boolean ENDED;
     private PlayActivity activity;
@@ -114,6 +115,7 @@ public class MineSweeper {
 
     public void setBOMBS(int BOMBS) {
         this.BOMBS = BOMBS;
+        this.bombsLeft = BOMBS;
     }
 
     public void setENDED(boolean ended) {
@@ -151,5 +153,14 @@ public class MineSweeper {
 
     public Cell[][] getMatrix() {
         return this.MATRIX;
+    }
+
+    public int getBombsLeft() {
+        return bombsLeft;
+    }
+
+    public void setBombsLeft(int bombsLeft) {
+        this.bombsLeft = bombsLeft;
+        activity.setMinesLeft(bombsLeft);
     }
 }

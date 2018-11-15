@@ -86,6 +86,11 @@ public class Cell extends androidx.appcompat.widget.AppCompatImageView implement
     public boolean onLongClick(View v) {
         if (!ended) {
             if (!isRevealed()) {
+                if(!isFlagged()){
+                    core.setBombsLeft(core.getBombsLeft()-1);
+                }else{
+                    core.setBombsLeft(core.getBombsLeft()+1);
+                }
                 setFlagged();
                 invalidate();
             }

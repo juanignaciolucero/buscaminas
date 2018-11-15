@@ -21,6 +21,7 @@ import com.example.john.buscaminas.util.MineSweeper;
 public class PlayActivity extends AppCompatActivity {
     private Chronometer t;
     private MineSweeper core;
+    private TextView bombCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +29,15 @@ public class PlayActivity extends AppCompatActivity {
         core = MineSweeper.getInstance();
         core.setActivity(this);
         setContentView(R.layout.activity_play);
+
         GridView gridView = findViewById(R.id.msgridView);
         gridView.setNumColumns(core.getGRID_WIDTH());
         GridAdapter gridAdapter = new GridAdapter(this);
         gridView.setAdapter(gridAdapter);
-        TextView bombCounter = findViewById(R.id.mineCounter);
+
+        bombCounter = findViewById(R.id.mineCounter);
         bombCounter.setText(Integer.toString(core.getBOMBS()));
+
         t = findViewById(R.id.timeCounter);
         t.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -74,5 +78,9 @@ public class PlayActivity extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
+    }
+
+    public void setMinesLeft(int minesLeft){
+        bombCounter.setText(Integer.toString(minesLeft));
     }
 }
