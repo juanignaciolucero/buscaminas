@@ -19,9 +19,9 @@ import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BestsActivity extends AppCompatActivity {
-    TableLayout tl;
-    GameDB db;
-    Context context= null;
+    private TableLayout tl;
+    private GameDB db;
+    private Context context= null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,25 +66,6 @@ public class BestsActivity extends AppCompatActivity {
             user.setText(db.userDao().findById(g.getUser()).getNickName());
             user.setGravity(Gravity.CENTER_HORIZONTAL);
 
-            /*TextView gameDiff = new TextView(context);
-            gameDiff.setTypeface(null,Typeface.BOLD);
-            gameDiff.setTextColor(white);
-            gameDiff.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36);
-            gameDiff.setGravity(Gravity.CENTER_HORIZONTAL);
-            String diffString = "";
-            switch (g.getGameDif()) {
-                case 0:
-                    diffString = getResources().getString(R.string.easy);
-                    break;
-                case 1:
-                    diffString = getResources().getString(R.string.medium);
-                    break;
-                case 2:
-                    diffString = getResources().getString(R.string.hard);
-                    break;
-
-            }
-            gameDiff.setText(diffString);*/
 
             TextView seconds = new TextView(context);
             seconds.setText(Integer.toString(g.getTime()));
@@ -94,7 +75,6 @@ public class BestsActivity extends AppCompatActivity {
             seconds.setGravity(Gravity.CENTER_HORIZONTAL);
 
             tr.addView(user,0);
-            //tr.addView(gameDiff,1);
             tr.addView(seconds,1);
             tl.addView(tr);
         }

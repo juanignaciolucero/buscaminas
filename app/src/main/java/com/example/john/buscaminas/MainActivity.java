@@ -12,6 +12,7 @@ import androidx.room.Room;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MineSweeper core;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
         GameDB db = Room.databaseBuilder(getApplicationContext(),GameDB.class,"game_db")
                 .allowMainThreadQueries()
                 .build();
-        MineSweeper.setDB(db);
+        core = MineSweeper.getInstance();
+        core.setDB(db);
     }
 
     public void play(View view){

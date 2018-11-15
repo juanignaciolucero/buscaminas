@@ -9,16 +9,18 @@ import com.example.john.buscaminas.view.Cell;
 
 public class GridAdapter extends BaseAdapter {
     private Cell[][] matrix;
-    public Context context;
+    private Context context;
+    private MineSweeper core;
 
     public GridAdapter(Context context) {
         this.context = context;
-        this.matrix = MineSweeper.MATRIX;
+        core = MineSweeper.getInstance();
+        this.matrix = core.getMatrix();
     }
 
     @Override
     public int getCount() {
-        return MineSweeper.GRID_HEIGHT * MineSweeper.GRID_WIDTH;
+        return core.getGRID_HEIGHT() * core.getGRID_WIDTH();
     }
 
     @Override
@@ -33,8 +35,8 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        int x = position % MineSweeper.GRID_WIDTH;
-        int y = position / MineSweeper.GRID_WIDTH;
+        int x = position % core.getGRID_WIDTH();
+        int y = position / core.getGRID_WIDTH();
         return matrix[x][y];
     }
 }

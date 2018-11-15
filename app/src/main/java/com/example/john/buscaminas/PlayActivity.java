@@ -19,21 +19,21 @@ import com.example.john.buscaminas.util.MineSweeper;
 
 
 public class PlayActivity extends AppCompatActivity {
-    GridView gridView;
-    GridAdapter gridAdapter;
-    Chronometer t;
+    private Chronometer t;
+    private MineSweeper core;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MineSweeper.setActivity(this);
+        core = MineSweeper.getInstance();
+        core.setActivity(this);
         setContentView(R.layout.activity_play);
-        gridView = findViewById(R.id.msgridView);
-        gridView.setNumColumns(MineSweeper.GRID_WIDTH);
-        gridAdapter = new GridAdapter(this);
+        GridView gridView = findViewById(R.id.msgridView);
+        gridView.setNumColumns(core.getGRID_WIDTH());
+        GridAdapter gridAdapter = new GridAdapter(this);
         gridView.setAdapter(gridAdapter);
         TextView bombCounter = findViewById(R.id.mineCounter);
-        bombCounter.setText(Integer.toString(MineSweeper.BOMBS));
+        bombCounter.setText(Integer.toString(core.getBOMBS()));
         t = findViewById(R.id.timeCounter);
         t.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -54,8 +54,8 @@ public class PlayActivity extends AppCompatActivity {
     public void endWin() {
         t.stop();
         int time =(int) (SystemClock.elapsedRealtime()-t.getBase())/1000;
-        Game game = new Game(MineSweeper.user,MineSweeper.dif,time);
-        MineSweeper.saveGame(game);
+        Game game = new Game(core.getUser(),core.getDif(),time);
+        core.saveGame(game);
         createMsg(true).show();
 
 

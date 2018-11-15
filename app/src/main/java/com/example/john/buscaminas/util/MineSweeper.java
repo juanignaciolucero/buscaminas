@@ -9,15 +9,15 @@ import com.example.john.buscaminas.view.Cell;
 
 public class MineSweeper {
     private static MineSweeper INSTANCE;
-    public static int GRID_HEIGHT;
-    public static int GRID_WIDTH;
-    public static int BOMBS;
-    public static Cell[][] MATRIX;
-    public static boolean ENDED;
-    private static PlayActivity activity;
-    public static int user;
-    public static GameDB DB;
-    public static int dif;
+    private int GRID_HEIGHT;
+    private int GRID_WIDTH;
+    private int BOMBS;
+    private Cell[][] MATRIX;
+    private boolean ENDED;
+    private PlayActivity activity;
+    private int user;
+    private GameDB DB;
+    private int dif;
 
 
     public static MineSweeper getInstance() {
@@ -28,50 +28,50 @@ public class MineSweeper {
     }
 
     MineSweeper() {
-        ENDED = false;
+        this.ENDED = false;
     }
 
-    public static void click(int position) {
-        int x = position % GRID_WIDTH;
-        int y = position / GRID_WIDTH;
+    public void click(int position) {
+        int x = position % this.GRID_WIDTH;
+        int y = position / this.GRID_WIDTH;
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 if (x + i >= 0 &&
-                        x + i < GRID_WIDTH &&
+                        x + i < this.GRID_WIDTH &&
                         y + j >= 0 &&
-                        y + j < GRID_HEIGHT &&
+                        y + j < this.GRID_HEIGHT &&
                         !(i == 0 && j == 0)) {
-                    MATRIX[x + i][y + j].onClick(MATRIX[x][y]);
+                    this.MATRIX[x + i][y + j].onClick(this.MATRIX[x][y]);
                 }
             }
         }
     }
 
-    public static void endGame() {
-        ENDED = true;
-        for (int i = 0; i < GRID_WIDTH; i++) {
-            for (int j = 0; j < GRID_HEIGHT; j++) {
-                MATRIX[i][j].end();
+    public void endGame() {
+        this.ENDED = true;
+        for (int i = 0; i < this.GRID_WIDTH; i++) {
+            for (int j = 0; j < this.GRID_HEIGHT; j++) {
+                this.MATRIX[i][j].end();
             }
         }
-        activity.endLose();
+        this.activity.endLose();
     }
 
-    public static GameDB getDB() {
-        return DB;
+    public GameDB getDB() {
+        return this.DB;
     }
 
-    public static void setDB(GameDB DB) {
-        MineSweeper.DB = DB;
+    public void setDB(GameDB DB) {
+        this.DB = DB;
     }
 
-    public static void checkForWin() {
+    public void checkForWin() {
         Boolean exit = false;
         int x = 0;
         int y = 0;
-        while (y < MineSweeper.GRID_HEIGHT && !exit) {
-            while (x < MineSweeper.GRID_WIDTH && !exit) {
-                if (!MineSweeper.MATRIX[x][y].isRevealed() && !MineSweeper.MATRIX[x][y].isBomb()) {
+        while (y < this.GRID_HEIGHT && !exit) {
+            while (x < this.GRID_WIDTH && !exit) {
+                if (!this.MATRIX[x][y].isRevealed() && !this.MATRIX[x][y].isBomb()) {
                     exit = true;
                 }
                 x++;
@@ -84,56 +84,72 @@ public class MineSweeper {
         }
     }
 
-    public static void setUser(int user) {
-        MineSweeper.user = user;
+    public void setUser(int user) {
+        this.user = user;
     }
 
-    public static void saveGame(Game game) {
-        DB.gameDao().insert(game);
+    public void saveGame(Game game) {
+        this.DB.gameDao().insert(game);
     }
 
     public int getGRID_HEIGHT() {
-        return GRID_HEIGHT;
+        return this.GRID_HEIGHT;
     }
 
     public void setGRID_HEIGHT(int GRID_HEIGHT) {
-        MineSweeper.GRID_HEIGHT = GRID_HEIGHT;
+        this.GRID_HEIGHT = GRID_HEIGHT;
     }
 
     public int getGRID_WIDTH() {
-        return GRID_WIDTH;
+        return this.GRID_WIDTH;
     }
 
     public void setGRID_WIDTH(int GRID_WIDTH) {
-        MineSweeper.GRID_WIDTH = GRID_WIDTH;
+        this.GRID_WIDTH = GRID_WIDTH;
     }
 
     public int getBOMBS() {
-        return BOMBS;
+        return this.BOMBS;
     }
 
     public void setBOMBS(int BOMBS) {
-        MineSweeper.BOMBS = BOMBS;
+        this.BOMBS = BOMBS;
     }
 
     public void setENDED(boolean ended) {
-        ENDED = ended;
+        this.ENDED = ended;
     }
 
     public void createGrid(Context context) {
         GridModel gridModel = new GridModel(GRID_WIDTH, GRID_HEIGHT, BOMBS, context);
-        MATRIX = gridModel.getGrid();
+        this.MATRIX = gridModel.getGrid();
     }
 
     public PlayActivity getActivity() {
-        return activity;
+        return this.activity;
     }
 
-    public static void setActivity(PlayActivity activity) {
-        MineSweeper.activity = activity;
+    public void setActivity(PlayActivity activity) {
+        this.activity = activity;
     }
 
     public void setDif(int dif) {
-        MineSweeper.dif=dif;
+        this.dif = dif;
+    }
+
+    public boolean isEnded() {
+        return this.ENDED;
+    }
+
+    public int getUser() {
+        return this.user;
+    }
+
+    public int getDif() {
+        return this.dif;
+    }
+
+    public Cell[][] getMatrix() {
+        return this.MATRIX;
     }
 }

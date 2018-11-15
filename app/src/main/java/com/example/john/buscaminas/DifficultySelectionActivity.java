@@ -8,14 +8,16 @@ import android.view.View;
 import com.example.john.buscaminas.util.MineSweeper;
 
 public class DifficultySelectionActivity extends AppCompatActivity {
+    private MineSweeper core;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficulty_selection);
+        core = MineSweeper.getInstance();
     }
 
     public void select(View view) {
-        MineSweeper core = MineSweeper.getInstance();
+
         int height=0;
         int width=0;
         int bombs=0;

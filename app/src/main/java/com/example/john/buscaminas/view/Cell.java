@@ -3,7 +3,9 @@ package com.example.john.buscaminas.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+
 import androidx.core.content.ContextCompat;
+
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -12,6 +14,7 @@ import com.example.john.buscaminas.util.MineSweeper;
 
 public class Cell extends androidx.appcompat.widget.AppCompatImageView implements View.OnClickListener, View.OnLongClickListener {
     private boolean isBomb;
+    private MineSweeper core;
     private int neighbors;
     private boolean isRevealed;
     private boolean isFlagged;
@@ -28,6 +31,7 @@ public class Cell extends androidx.appcompat.widget.AppCompatImageView implement
     public Cell(Context context, AttributeSet attrs, int position) {
 
         super(context);
+        core = MineSweeper.getInstance();
         this.position = position;
         this.isRevealed = false;
         this.isFlagged = false;
@@ -52,7 +56,7 @@ public class Cell extends androidx.appcompat.widget.AppCompatImageView implement
             } else {
                 draw = R.drawable.bomb_exploded;
             }
-        } else if (isBomb() && MineSweeper.ENDED) {
+        } else if (isBomb() && core.isEnded()) {
             draw = R.drawable.bomb_normal;
         }
 
@@ -68,12 +72,12 @@ public class Cell extends androidx.appcompat.widget.AppCompatImageView implement
                 setRevealed();
                 invalidate();
                 if (neighbors == 0) {
-                    MineSweeper.click(position);
+                    core.click(position);
                 }
                 if (isBomb()) {
-                    MineSweeper.endGame();
+                    core.endGame();
                 }
-                MineSweeper.checkForWin();
+                core.checkForWin();
             }
         }
     }
@@ -93,11 +97,7 @@ public class Cell extends androidx.appcompat.widget.AppCompatImageView implement
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-        /*if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-            super.onMeasure(heightMeasureSpec, heightMeasureSpec);
-        }else if (getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){*/
-            super.onMeasure(widthMeasureSpec, widthMeasureSpec);
-        //}
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }
 
     public void setBomb() {
@@ -135,8 +135,14 @@ public class Cell extends androidx.appcompat.widget.AppCompatImageView implement
         isFlagged = !isFlagged;
     }
 
-    public void end(){
+    public void end() {
+
         this.ended = true;
         invalidate();
+    }
+
+    public void setCore(MineSweeper core) {
+
+        this.core = core;
     }
 }

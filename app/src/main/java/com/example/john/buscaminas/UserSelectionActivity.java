@@ -14,16 +14,17 @@ import com.example.john.buscaminas.db.User;
 import com.example.john.buscaminas.util.MineSweeper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserSelectionActivity extends AppCompatActivity {
-    GameDB db;
-    Spinner spinner;
+    private GameDB db;
+    private Spinner spinner;
+    private MineSweeper core;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = GameDB.getDB(this);
+        core = MineSweeper.getInstance();
         setContentView(R.layout.activity_user_selection);
         ArrayAdapter<String> adapter = createAdapter();
         spinner = findViewById(R.id.spinner);
@@ -52,7 +53,7 @@ public class UserSelectionActivity extends AppCompatActivity {
 
     public void play(View view) {
         User user = db.userDao().findByAlias(spinner.getSelectedItem().toString());
-        MineSweeper.setUser(user.getUid());
+        core.setUser(user.getUid());
         Intent difficultySelection = new Intent(this, DifficultySelectionActivity.class);
         startActivity(difficultySelection);
     }

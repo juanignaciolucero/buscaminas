@@ -18,10 +18,11 @@ public class GridModel {
     }
 
     private void createGrid(int width, int height, int bombs) {
+        MineSweeper core = MineSweeper.getInstance();
         Cell[][] matrix = new Cell[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                Cell cell = new Cell(context,null, j * MineSweeper.GRID_WIDTH + i);
+                Cell cell = new Cell(context,null, j * core.getGRID_WIDTH()+ i);
                 matrix[i][j] = cell;
             }
         }
