@@ -1,6 +1,7 @@
 package com.example.john.buscaminas;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 
@@ -30,14 +31,18 @@ public class PlayActivity extends AppCompatActivity {
         core.setActivity(this);
         setContentView(R.layout.activity_play);
 
+        //Crea la cuadricula y su adapter
         GridView gridView = findViewById(R.id.msgridView);
         gridView.setNumColumns(core.getGRID_WIDTH());
         GridAdapter gridAdapter = new GridAdapter(this);
         gridView.setAdapter(gridAdapter);
 
+        //Crea el contador de bombas
         bombCounter = findViewById(R.id.mineCounter);
         bombCounter.setText(Integer.toString(core.getBOMBS()));
+        bombCounter.setTextColor(Color.BLACK);
 
+        //Crea el cronometro
         t = findViewById(R.id.timeCounter);
         t.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -52,6 +57,7 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void endLose() {
+        t.stop();
         createMsg(false).show();
     }
 
@@ -66,12 +72,12 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public AlertDialog.Builder createMsg(Boolean win) {
-        TextView mensaje = new TextView(this);
-        mensaje.setText(win ? R.string.win : R.string.lose);
-        mensaje.setTextSize(36f);
-        mensaje.setGravity(Gravity.CENTER_HORIZONTAL);
+        TextView message = new TextView(this);
+        message.setText(win ? R.string.win : R.string.lose);
+        message.setTextSize(36f);
+        message.setGravity(Gravity.CENTER_HORIZONTAL);
         return new AlertDialog.Builder(this)
-                .setView(mensaje)
+                .setView(message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();

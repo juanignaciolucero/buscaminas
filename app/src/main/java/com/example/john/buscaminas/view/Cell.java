@@ -1,3 +1,4 @@
+
 package com.example.john.buscaminas.view;
 
 import android.content.Context;
@@ -39,7 +40,7 @@ public class Cell extends androidx.appcompat.widget.AppCompatImageView implement
         setOnClickListener(this);
         setOnLongClickListener(this);
     }
-
+    //Dependiendo la condicion elige que dibujar en la celda
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -68,7 +69,7 @@ public class Cell extends androidx.appcompat.widget.AppCompatImageView implement
     @Override
     public void onClick(View v) {
         if (!ended) {
-            if (!isRevealed) {
+            if (!isRevealed() && !isFlagged()) {
                 setRevealed();
                 invalidate();
                 if (neighbors == 0) {
@@ -101,7 +102,6 @@ public class Cell extends androidx.appcompat.widget.AppCompatImageView implement
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }
 

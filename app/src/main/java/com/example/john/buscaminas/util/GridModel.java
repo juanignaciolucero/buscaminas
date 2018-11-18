@@ -17,6 +17,7 @@ public class GridModel {
 
     }
 
+    //Crea la matriz de ImageViews, luego le carga bombas y luego calcula cuantas bombas hay cerca
     private void createGrid(int width, int height, int bombs) {
         MineSweeper core = MineSweeper.getInstance();
         Cell[][] matrix = new Cell[width][height];
@@ -31,6 +32,7 @@ public class GridModel {
         this.matrix = matrix;
     }
 
+    //Calcula cuantos de sus vecinos son bomba
     private void calcNeighbors(Cell[][] matrix, int width, int height) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -38,6 +40,7 @@ public class GridModel {
             }
         }
     }
+
 
     private int neighbors(int x, int y, Cell[][] matrix, int width, int height) {
         int count = 0;

@@ -1,3 +1,5 @@
+/*Esta clase se encarga de mantener datos de configuracion del juego,y tambien una matriz
+ conteniendo todas las celdas.*/
 package com.example.john.buscaminas.util;
 
 import android.content.Context;
@@ -32,6 +34,7 @@ public class MineSweeper {
         this.ENDED = false;
     }
 
+    //Simula el comportamiento que sucede cuando se clickea una celda que no es bomba y tampoco sos vecinos
     public void click(int position) {
         int x = position % this.GRID_WIDTH;
         int y = position / this.GRID_WIDTH;
@@ -48,6 +51,7 @@ public class MineSweeper {
         }
     }
 
+    //Deshabilita todas las celdas al momento de finalizar el juego por perder
     public void endGame() {
         this.ENDED = true;
         for (int i = 0; i < this.GRID_WIDTH; i++) {
@@ -66,6 +70,7 @@ public class MineSweeper {
         this.DB = DB;
     }
 
+    //Chequea si aun quedan por revelar celdas que no sean bomba
     public void checkForWin() {
         Boolean exit = false;
         int x = 0;
